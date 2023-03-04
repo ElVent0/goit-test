@@ -19,6 +19,18 @@ const Card = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [numberOfFollowers, setNumberOfFollowers] = useState(100500);
 
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("isFollowing")) !== null &&
+      JSON.parse(localStorage.getItem("numberOfFollowers")) !== null
+    ) {
+      setIsFollowing(JSON.parse(localStorage.getItem("isFollowing")));
+      setNumberOfFollowers(
+        JSON.parse(localStorage.getItem("numberOfFollowers"))
+      );
+    }
+  }, []);
+
   const onFollow = () => {
     setIsFollowing(!isFollowing);
     localStorage.setItem("isFollowing", !isFollowing);
@@ -37,18 +49,6 @@ const Card = () => {
       );
     }
   };
-
-  useEffect(() => {
-    if (
-      JSON.parse(localStorage.getItem("isFollowing")) !== null &&
-      JSON.parse(localStorage.getItem("numberOfFollowers")) !== null
-    ) {
-      setIsFollowing(JSON.parse(localStorage.getItem("isFollowing")));
-      setNumberOfFollowers(
-        JSON.parse(localStorage.getItem("numberOfFollowers"))
-      );
-    }
-  }, []);
 
   return (
     <CardStyled>
